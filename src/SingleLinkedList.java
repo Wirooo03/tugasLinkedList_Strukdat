@@ -24,6 +24,53 @@ class SingleLinkedList {
         head = newNode;
     }
 
+    //--------------[ Fungsi Menghapus elemen pertama ]-----------------
+    public void deleteFirst() {
+        if (head == null) {
+            System.out.println("Linked list kosong.");
+            return;
+        }
+        head = head.next;
+    }
+
+    //--------------[ Fungsi Menghapus elemen terakhir ]-----------------
+    public void deleteLast() {
+        if (head == null) {
+            System.out.println("Linked list kosong.");
+            return;
+        }
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+        Node current = head;
+        while (current.next.next != null) {
+            current = current.next;
+        }
+        current.next = null;
+    }
+
+    //--------------[ Fungsi Menghapus elemen di tengah berdasarkan nilai ]-----------------
+    public void deleteMiddle(int data) {
+        if (head == null) {
+            System.out.println("Linked list kosong.");
+            return;
+        }
+        if (head.data == data) {
+            head = head.next;
+            return;
+        }
+        Node current = head;
+        while (current.next != null && current.next.data != data) {
+            current = current.next;
+        }
+        if (current.next == null) {
+            System.out.println("Data " + data + " tidak ditemukan.");
+            return;
+        }
+        current.next = current.next.next;
+    }
+
     //--------------[ Tugas 1A: Fungsi Menambahkan elemen dari Array ]-----------------
     public void addAll(int[] array) {
         for (int value : array) {
@@ -31,10 +78,9 @@ class SingleLinkedList {
         }
     }
 
-    //------------[ Tugas 1B: Fungsi Update elemen dari Linked LIst ]--------------
+    //------------[ Tugas 1B: Fungsi Update elemen dari Linked List ]--------------
     public void update(int dataLama, int dataBaru) {
         Node current = head;
-
         while (current != null) {
             if (current.data == dataLama) {
                 current.data = dataBaru;
@@ -53,7 +99,6 @@ class SingleLinkedList {
             list.add(temp.data);
             temp = temp.next;
         }
-
         int[] result = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i);
